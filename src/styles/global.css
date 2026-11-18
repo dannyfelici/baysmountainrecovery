@@ -1,0 +1,85 @@
+/* Blue Ridge Behavioral Health — design tokens
+   TODO: Replace placeholder colors and fonts with the final brand values
+   from the stacked mountain-arch logo. */
+
+:root {
+  /* Color */
+  --color-primary: #1f3a5f;      /* ridge blue (placeholder) */
+  --color-primary-dark: #142840;
+  --color-accent: #e3a33b;       /* sun (placeholder) */
+  --color-bg: #ffffff;
+  --color-surface: #f4f6f8;
+  --color-text: #1c2430;
+  --color-muted: #5b6675;
+  --color-border: #dde2e8;
+
+  /* Type */
+  --font-heading: Georgia, 'Times New Roman', serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --text-base: 1.0625rem;
+  --leading: 1.6;
+
+  /* Layout */
+  --container: 72rem;
+  --gutter: 1.25rem;
+  --radius: 0.5rem;
+  --space-section: clamp(3rem, 8vw, 6rem);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--color-primary);
+  margin: 0 0 0.75em;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--color-primary); }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section { padding-block: var(--space-section); }
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn:hover { filter: brightness(0.95); }
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  background: #fff;
+  padding: 0.5rem 1rem;
+}

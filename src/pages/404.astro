@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title={`Page Not Found | ${site.name}`} description="Page not found." noindex>
+  <section class="section">
+    <div class="container">
+      <h1>Page not found</h1>
+      <p>The page you're looking for doesn't exist. <a href="/">Go to the homepage</a> or call <a href={site.phoneHref}>{site.phone}</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

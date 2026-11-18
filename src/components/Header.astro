@@ -1,0 +1,42 @@
+---
+import { site, nav } from '../data/site';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label={`${site.name} home`}>
+      <!-- TODO: Replace with /images/logo.svg (stacked mountain-arch lockup) -->
+      {site.name}
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+            {item.children && (
+              <ul class="subnav">
+                {item.children.map((c) => (
+                  <li><a href={c.href}>{c.label}</a></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a class="btn" href={site.phoneHref}>{site.phone}</a>
+  </div>
+</header>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--color-border); background: #fff; }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 1rem; }
+  .logo { font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem; text-decoration: none; }
+  .nav { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+  .nav > li { position: relative; }
+  .nav a { text-decoration: none; font-weight: 600; }
+  .subnav { display: none; position: absolute; top: 100%; left: 0; list-style: none; margin: 0; padding: 0.5rem 0; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); min-width: 14rem; }
+  .subnav a { display: block; padding: 0.4rem 1rem; font-weight: 400; }
+  .nav > li:hover .subnav, .nav > li:focus-within .subnav { display: block; }
+  @media (max-width: 860px) { nav { display: none; } /* TODO: mobile menu */ }
+</style>
