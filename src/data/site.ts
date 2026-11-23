@@ -73,7 +73,15 @@ export const sectionLabels: Record<string, string> = {
   contact: 'Contact',
 };
 
-export const payers = ['Blue Cross Blue Shield', 'Aetna', 'Cigna', 'UnitedHealthcare', 'Humana'];
+// Logo files in public/images/insurance/. `h` is the display height in px,
+// tuned so the logos look balanced at their different aspect ratios.
+export const payers = [
+  { name: 'Blue Cross Blue Shield', logo: '/images/insurance/bcbs.svg', h: 38 },
+  { name: 'Aetna', logo: '/images/insurance/aetna.svg', h: 26 },
+  { name: 'Cigna Healthcare', logo: '/images/insurance/cigna.svg', h: 48 },
+  { name: 'UnitedHealthcare', logo: '/images/insurance/unitedhealthcare.svg', h: 40 },
+  { name: 'Humana', logo: '/images/insurance/humana.svg', h: 24 },
+];
 
 export const mapEmbed =
   'https://www.google.com/maps?q=2000+Greenway+Street,+Kingsport,+TN+37660&output=embed';
