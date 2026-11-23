@@ -18,10 +18,38 @@ export const site = {
   staging: true,
 };
 
-export const nav = [
-  { label: 'About', href: '/about/' },
-  { label: 'Detox', href: '/detox/' },
+export type NavItem = { label: string; href: string; children?: { label: string; href: string }[] };
+
+export const nav: NavItem[] = [
+  {
+    label: 'About',
+    href: '/about/',
+    children: [
+      { label: 'Our Team', href: '/about/our-team/' },
+      { label: 'Our Facility', href: '/about/facility/' },
+    ],
+  },
+  {
+    label: 'Detox',
+    href: '/detox/',
+    children: [
+      { label: 'Alcohol Detox', href: '/detox/alcohol/' },
+      { label: 'Opioid Detox', href: '/detox/opioids/' },
+      { label: 'Benzodiazepine Detox', href: '/detox/benzodiazepine/' },
+      { label: 'Meth Detox', href: '/detox/meth/' },
+    ],
+  },
   { label: 'Residential Treatment', href: '/residential-treatment/' },
+  {
+    label: 'Addiction Treatment',
+    href: '/addiction/',
+    children: [
+      { label: 'Alcohol Addiction', href: '/addiction/alcohol/' },
+      { label: 'Opioid Addiction', href: '/addiction/opioids/' },
+      { label: 'Heroin Addiction', href: '/addiction/heroin/' },
+      { label: 'Meth Addiction', href: '/addiction/meth/' },
+    ],
+  },
   { label: 'Therapies', href: '/therapies/' },
   { label: 'Contact', href: '/contact/' },
 ];

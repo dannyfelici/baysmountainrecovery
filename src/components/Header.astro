@@ -5,6 +5,7 @@ interface Props { solid?: boolean }
 const { solid = true } = Astro.props;
 const current = Astro.url.pathname;
 const isCurrent = (href: string) => current === href || (href !== '/' && current.startsWith(href));
+const caret = '<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 L5 6.5 L8 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>';
 ---
 
 <header class:list={['site-header', { 'site-header--solid': solid }]}>
@@ -15,18 +16,37 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
     <nav class="main-nav" aria-label="Main">
       <ul>
         {nav.map((item) => (
-          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+          <li class:list={{ 'has-menu': item.children }}>
+            <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+              {item.label}{item.children && <Fragment set:html={caret} />}
+            </a>
+            {item.children && (
+              <ul class="dropdown">
+                {item.children.map((c) => (
+                  <li><a href={c.href} aria-current={current === c.href ? 'page' : undefined}>{c.label}</a></li>
+                ))}
+              </ul>
+            )}
+          </li>
         ))}
       </ul>
     </nav>
     <div class="header-ctas">
-      <a class="btn-outline" href={site.phoneHref}>{site.phone}</a>
-      <a class="btn" href="/contact/">Verify Insurance</a>
+      <a class="btn" href={site.phoneHref}>{site.phone}</a>
     </div>
     <details class="mobile-nav">
       <summary>Menu</summary>
       <div class="mobile-panel">
-        {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+        {nav.map((item) => (
+          <>
+            <a href={item.href}>{item.label}</a>
+            {item.children && (
+              <div class="mobile-sub">
+                {item.children.map((c) => <a href={c.href}>{c.label}</a>)}
+              </div>
+            )}
+          </>
+        ))}
         <a class="btn" href={site.phoneHref}>Call {site.phone}</a>
       </div>
     </details>
