@@ -1,0 +1,14 @@
+---
+import { edgeA, edgeB } from '../data/edges';
+
+interface Props {
+  position: 'top' | 'bottom';
+  variant?: 'a' | 'b';
+  fill?: string;
+}
+const { position, variant = 'a', fill = 'var(--cream)' } = Astro.props;
+---
+
+<svg class={`torn torn--${position}`} viewBox="0 0 1440 36" preserveAspectRatio="none" aria-hidden="true">
+  <path d={variant === 'a' ? edgeA : edgeB} fill={fill}></path>
+</svg>

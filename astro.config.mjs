@@ -4,17 +4,11 @@ import sitemap from '@astrojs/sitemap';
 
 // Static build, served by Cloudflare Workers (static assets). See wrangler.jsonc.
 export default defineConfig({
-  site: 'https://blueridgebhtn.com',
+  site: 'https://baysmountainrecovery.com',
   output: 'static',
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   build: {
-    format: 'file',
+    format: 'directory',
   },
-  integrations: [
-    sitemap({
-      // Pre-launch: only the splash page goes in the sitemap.
-      // Remove this filter when the full site launches.
-      filter: (page) => new URL(page).pathname === '/',
-    }),
-  ],
+  integrations: [sitemap()],
 });

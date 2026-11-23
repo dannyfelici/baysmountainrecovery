@@ -1,35 +1,191 @@
 ---
-// Splash page — live until the full site launches.
-// When the full homepage is ready, replace this file (GBAC homepage layout).
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import Header from '../components/Header.astro';
+import TornEdge from '../components/TornEdge.astro';
+import { site, payers, mapEmbed } from '../data/site';
+
+const faqs = [
+  {
+    q: 'What programs does Bays Mountain Recovery offer?',
+    html: 'Our treatment model includes <a href="/detox/">medical detox</a> and <a href="/residential-treatment/">residential addiction treatment</a> for adults struggling with drug and alcohol addiction. We also address co-occurring mental health conditions within our addiction-focused care.',
+  },
+  {
+    q: 'Can I move from detox into residential treatment?',
+    html: 'Yes, when a clinical assessment indicates that residential treatment is appropriate, patients may transition between the two levels of care at the same facility.',
+  },
+  {
+    q: 'Where is Bays Mountain Recovery located?',
+    html: 'We are located at 2000 Greenway Street, Kingsport, TN 37660, serving adults from the Tri-Cities region and surrounding communities.',
+  },
+  {
+    q: 'Do you accept insurance?',
+    html: 'We can discuss insurance verification and potential coverage for addiction treatment. Benefits and eligibility vary, and participating insurance plans should be confirmed with our team.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.html.replace(/<[^>]+>/g, '') },
+    })),
+  },
+];
+
+const arrow = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>';
+const check = '<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#F2F0EB"></circle><path d="M6.5 11.5 L9.5 14.5 L15.5 8" fill="none" stroke="#34473D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+const features = [
+  '24/7 medically supervised detox.',
+  'Medication management during withdrawal.',
+  'Individual therapy and group therapy.',
+  'Care for co-occurring mental health conditions.',
+  'Family involvement and education.',
+  'Relapse prevention planning.',
+  'Discharge and aftercare planning.',
+];
 ---
 
 <BaseLayout
-  title={`${site.name} | Detox & Residential Treatment in Kingsport, TN`}
-  description={`${site.name} is a ${site.beds}-bed inpatient detox and residential addiction treatment center coming to Kingsport, TN in 2027.`}
-  bare
+  title="Drug & Alcohol Rehab | Kingsport, TN | Bays Mountain Recovery"
+  description="Explore drug and alcohol rehab in Kingsport, TN. Bays Mountain Recovery offers medical detox and residential treatment for adults with addiction."
+  schema={schema}
+  headerOverHero
 >
-  <section class="splash">
-    <div class="container splash-inner">
-      <!-- TODO: Add stacked mountain-arch logo: <img src="/images/logo.svg" alt="Blue Ridge Behavioral Health" width="280" height="200" /> -->
-      <p class="eyebrow">{site.status}</p>
-      <h1>{site.name}</h1>
-      <p class="lede">{site.tagline}.</p>
-      <p>A {site.beds}-bed inpatient program offering medical detox and residential treatment for substance use disorders.</p>
-      <a class="btn" href={site.phoneHref}>Call {site.phone}</a>
-      <address>
-        {site.address.street}, {site.address.city}, {site.address.state} {site.address.zip}
-      </address>
+  <section class="home-hero">
+    <img src="/images/bays-mountain-skyline.jpg" alt="Bays Mountain rising above Kingsport, Tennessee" fetchpriority="high" />
+    <Header solid={false} />
+    <div class="container home-hero-copy">
+      <p class="eyebrow">Medical Detox &amp; Residential Treatment · Kingsport, TN</p>
+      <h1>Drug and Alcohol Rehab in Kingsport, TN</h1>
+      <p class="subhead">Inpatient recovery, rooted in the mountains of East Tennessee.</p>
+      <p class="intro">At Bays Mountain Recovery, adults struggling with substance use disorders can find medical detox and residential addiction treatment in one supportive setting. Our 25-bed facility in Kingsport, Tennessee, also cares for co-occurring mental health conditions, helping you begin recovery with a plan for what comes next.</p>
+      <div class="btn-row">
+        <a class="btn-gold" href={site.phoneHref}>Call Now</a>
+        <a class="btn" href="/contact/">Verify Your Options</a>
+      </div>
+    </div>
+    <div style="flex: 1"></div>
+    <TornEdge position="bottom" />
+  </section>
+
+  <section class="container section">
+    <h2>More Than Detox.<br />A Full Path to Recovery.</h2>
+    <p class="section-intro">Medical detox can be an important first step, but recovery does not end when withdrawal symptoms improve. Bays Mountain Recovery brings medical detox and residential treatment together under one roof, making it easier for patients who need both levels of care to keep moving forward without changing facilities.</p>
+    <p class="section-intro">With 25 beds, our program is designed around a smaller treatment setting and personalized attention. Our goal is to help you feel known, supported, and prepared for each stage of recovery.</p>
+    <div class="card-grid">
+      <div class="card">
+        <span class="icon-box"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 4 V24 M4 14 H24 M9 4 H19 M9 24 H19" fill="none" stroke="#34473D" stroke-width="1.7" stroke-linecap="round"></path></svg></span>
+        <h3>Medical Detox</h3>
+        <p>Medically supervised withdrawal management helps patients stabilize and prepare for continued treatment.</p>
+        <a class="btn-pill" href="/detox/">Learn More</a>
+      </div>
+      <div class="card">
+        <span class="icon-box"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 13 L14 4 L24 13 M7 11 V24 H21 V11 M11 24 V17 H17 V24" fill="none" stroke="#34473D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+        <h3>Residential Treatment</h3>
+        <p>A structured, live-in setting supports counseling, healthier coping skills, and relapse prevention.</p>
+        <a class="btn-pill" href="/residential-treatment/">Learn More</a>
+      </div>
+      <div class="card">
+        <span class="icon-box"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 10 a3 3 0 1 0 0.1 0 M19 10 a3 3 0 1 0 0.1 0 M3 23 a6 6 0 0 1 12 0 M13 23 a6 6 0 0 1 12 0" fill="none" stroke="#34473D" stroke-width="1.7" stroke-linecap="round"></path></svg></span>
+        <h3>Small by Design</h3>
+        <p>A 25-bed setting is intended to support more personal attention and a calmer experience.</p>
+      </div>
     </div>
   </section>
-</BaseLayout>
 
-<style>
-  .splash { min-height: 100vh; display: grid; place-items: center; background: linear-gradient(180deg, var(--color-surface), #fff); text-align: center; }
-  .splash-inner { max-width: 40rem; padding-block: 4rem; }
-  .eyebrow { text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; color: var(--color-accent); margin: 0 0 0.5rem; }
-  h1 { font-size: clamp(2.25rem, 6vw, 3.5rem); }
-  .lede { font-size: 1.25rem; color: var(--color-muted); }
-  address { font-style: normal; margin-top: 2rem; color: var(--color-muted); }
-</style>
+  <section class="container section--tight" style="padding-bottom: var(--section)">
+    <div class="split">
+      <img src="/images/kingsport-sunset-aerial.jpg" alt="Downtown Kingsport at sunset with Bays Mountain in the distance" loading="lazy" />
+      <div>
+        <h2>Close to Home in the Tri-Cities. Rooted in Bays Mountain.</h2>
+        <p>Kingsport sits among the ridges of Northeast Tennessee, within reach of Johnson City, Bristol, and communities across the Virginia line. Here, the mountains are more than scenery. They are part of the region's history, traditions, and sense of belonging.</p>
+        <p>Even the name Bays Mountain carries stories passed down through generations. Some point to the mountain laurels, others to early families, and another local tale remembers a remarkable bay horse. The stories differ, but they share something important: this place has long been part of the lives and memories of East Tennesseans.</p>
+        <p>That connection matters to us. People enter treatment as individuals, but they are also members of families and communities. We believe recovery deserves compassion, respect, and a place where you can focus on change while remaining connected to the region you call home.</p>
+        <div class="btn-row">
+          <a class="btn" href="/about/">Learn More <Fragment set:html={arrow} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <TornEdge position="top" variant="b" />
+    <div class="container band-inner">
+      <div class="center" style="max-width: 48rem">
+        <h2>What Treatment at Bays Mountain Recovery Includes</h2>
+        <p>Our treatment model connects two levels of inpatient care. When clinically appropriate, a person can begin with <a href="/detox/">medical detox</a> and then transition into <a href="/residential-treatment/">residential addiction treatment</a> in the same facility. Care also considers co-occurring mental health needs, because substance use and emotional well-being can affect one another.</p>
+      </div>
+      <div class="split" style="margin-top: 3.5rem">
+        <div>
+          <h3>Planned treatment features</h3>
+          <ul class="checklist">
+            {features.map((f) => <li><Fragment set:html={check} /><span>{f}</span></li>)}
+          </ul>
+          <p style="margin-top: 1.5rem"><a href="/therapies/">Therapeutic support</a> can help you explore patterns of substance use, manage difficult thoughts and emotions, and develop healthier responses to stress. Shared experiences in group counseling may also help you see that you are not alone in recovery.</p>
+        </div>
+        <img class="brush-img" src="/images/fall-lake-bridge.jpg" alt="Fall color around a lake near Kingsport, Tennessee" loading="lazy" />
+      </div>
+    </div>
+    <TornEdge position="bottom" />
+  </section>
+
+  <section class="container section">
+    <h2 class="center" style="text-align: center">How to Get Started</h2>
+    <p class="section-intro center" style="text-align: center">Reaching out may be easier when you know what happens next. Our goal is to make the process clear, respectful, and focused on your needs.</p>
+    <ol class="steps">
+      <li><span class="num">1</span><h3>Call admissions</h3><p>Talk with our team about your situation, concerns, and treatment questions.</p></li>
+      <li><span class="num">2</span><h3>Verify insurance</h3><p>Share your insurance information so available benefits and possible costs can be reviewed.</p></li>
+      <li><span class="num">3</span><h3>Complete an assessment</h3><p>A clinical screening helps determine the appropriate level of care.</p></li>
+      <li><span class="num">4</span><h3>Plan your admission</h3><p>Discuss the next steps, timing, and practical preparations for treatment.</p></li>
+    </ol>
+    <div class="btn-row" style="justify-content: center">
+      <a class="btn-gold" href={site.phoneHref}>Call Now</a>
+    </div>
+  </section>
+
+  <section class="container section--tight">
+    <div class="panel">
+      <div>
+        <h2 style="font-size: clamp(1.6rem, 2.6vw, 2rem)">Insurance and Payment Options</h2>
+        <p>Insurance questions should not keep you from asking about treatment. Coverage for medically necessary addiction care depends on your plan, benefits, and clinical needs. Contact our team to discuss verification and possible out-of-pocket costs.</p>
+        <p>We work with many major insurance providers, including Blue Cross Blue Shield, Aetna, Cigna, UnitedHealthcare, and Humana.</p>
+        <p style="margin: 0">Contact us at <a href={site.phoneHref}>{site.phone}</a> or <a href="/contact/">online</a> with any questions. We’re here to help.</p>
+      </div>
+      <div class="payers">
+        {payers.map((p) => <div>{p}</div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="split" style="align-items: stretch">
+      <div>
+        <h2>Find Us in Kingsport, TN</h2>
+        <p>Bays Mountain Recovery is located at 2000 Greenway Street, Kingsport, TN 37660.</p>
+        <p>We serve adults from Kingsport, Johnson City, Bristol, and other Tri-Cities communities across Northeast Tennessee and Southwest Virginia. Our location helps make treatment accessible to people seeking care close to the region they call home.</p>
+        <address>
+          <strong>{site.name}</strong><br />
+          {site.address.street}<br />
+          {site.address.city}, {site.address.state} {site.address.zip}<br />
+          <a href={site.phoneHref}>{site.phone}</a>
+        </address>
+      </div>
+      <div class="map-embed" style="flex: 1 1 480px; margin: 0">
+        <iframe title="Map to Bays Mountain Recovery, 2000 Greenway Street, Kingsport, TN" src={mapEmbed} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section--tight" style="max-width: 58rem; padding-bottom: var(--section)">
+    <h2 style="text-align: center">Frequently Asked Questions About Bays Mountain Recovery</h2>
+    {faqs.map((f) => (
+      <details class="faq">
+        <summary>{f.q}</summary>
+        <div class="faq-a"><p set:html={f.html} /></div>
+      </details>
+    ))}
+  </section>
+</BaseLayout>

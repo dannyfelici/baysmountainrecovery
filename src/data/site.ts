@@ -1,13 +1,11 @@
-// Single source of truth for business info (NAP) and navigation.
-// Update here, and every page, header, footer, and schema picks it up.
+// Single source of truth for business info (NAP), navigation, and staging status.
 
 export const site = {
-  name: 'Blue Ridge Behavioral Health',
-  url: 'https://blueridgebhtn.com',
-  tagline: 'Inpatient detox and residential addiction treatment in Kingsport, TN',
-  status: 'Coming in 2027',
-  phone: '865-272-4000',
-  phoneHref: 'tel:+18652724000',
+  name: 'Bays Mountain Recovery',
+  url: 'https://baysmountainrecovery.com',
+  tagline: 'Compassionate detox and residential care for addiction and co-occurring mental health conditions in Tennessee.',
+  phone: '(423) 214-1113',
+  phoneHref: 'tel:+14232141113',
   address: {
     street: '2000 Greenway Street',
     city: 'Kingsport',
@@ -15,22 +13,46 @@ export const site = {
     zip: '37660',
   },
   beds: 25,
+  // While true, every page is noindex and robots.txt blocks crawling.
+  // Set to false at launch.
+  staging: true,
 };
 
-// Launch pages only. Admissions, Areas We Serve, and Resources pillars
-// roll out with the SEO campaign after launch.
-// TODO: Align slugs with the approved sitemap.
 export const nav = [
-  { label: 'About', href: '/about' },
-  {
-    label: 'Treatment',
-    href: '/treatment',
-    children: [
-      { label: 'Medical Detox', href: '/treatment/detox' },
-      { label: 'Residential Treatment', href: '/treatment/residential' },
-    ],
-  },
-  { label: 'What We Treat', href: '/what-we-treat' },
-  { label: 'Insurance', href: '/insurance' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'About', href: '/about/' },
+  { label: 'Detox', href: '/detox/' },
+  { label: 'Residential Treatment', href: '/residential-treatment/' },
+  { label: 'Therapies', href: '/therapies/' },
+  { label: 'Contact', href: '/contact/' },
 ];
+
+export const footerLinks = [
+  { label: 'About', href: '/about/' },
+  { label: 'Detox', href: '/detox/' },
+  { label: 'Residential Treatment', href: '/residential-treatment/' },
+  { label: 'Addiction Treatment', href: '/addiction/' },
+  { label: 'Therapies', href: '/therapies/' },
+  { label: 'Contact', href: '/contact/' },
+];
+
+// Breadcrumb labels for section roots
+export const sectionLabels: Record<string, string> = {
+  about: 'About',
+  detox: 'Detox',
+  'residential-treatment': 'Residential Treatment',
+  addiction: 'Addiction Treatment',
+  therapies: 'Therapies',
+  contact: 'Contact',
+};
+
+export const payers = ['Blue Cross Blue Shield', 'Aetna', 'Cigna', 'UnitedHealthcare', 'Humana'];
+
+export const mapEmbed =
+  'https://www.google.com/maps?q=2000+Greenway+Street,+Kingsport,+TN+37660&output=embed';
+
+export const imageAlt: Record<string, string> = {
+  'bays-mountain-skyline': 'Bays Mountain rising above Kingsport, Tennessee',
+  'kingsport-sunset-aerial': 'Downtown Kingsport at sunset with Bays Mountain in the distance',
+  'kingsport-downtown': 'Tree-lined street in downtown Kingsport, Tennessee',
+  'fall-lake-bridge': 'Fall color around a lake near Kingsport, Tennessee',
+};

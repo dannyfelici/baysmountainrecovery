@@ -1,11 +1,11 @@
 {
   // Cloudflare Workers config — serves the static Astro build from ./dist
-  "name": "blueridgebehavioralhealth",
+  "name": "baysmountainrecovery",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page",
-    "html_handling": "drop-trailing-slash"
+    "html_handling": "auto-trailing-slash"
   }
-  // Add the custom domain (blueridgebhtn.com) under "routes" once DNS is on Cloudflare.
+  // Add the custom domain (baysmountainrecovery.com) under "routes" once DNS is on Cloudflare.
 }

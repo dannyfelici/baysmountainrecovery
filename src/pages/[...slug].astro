@@ -1,0 +1,108 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TornEdge from '../components/TornEdge.astro';
+import { site, sectionLabels, imageAlt } from '../data/site';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((entry) => ({
+    params: { slug: entry.data.path.replace(/^\/|\/$/g, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+
+const toc = headings.filter((h) => h.depth === 2);
+const segments = d.path.split('/').filter(Boolean);
+const crumbs = [{ name: 'Home', href: '/' }];
+if (segments.length > 1) crumbs.push({ name: sectionLabels[segments[0]] ?? segments[0], href: `/${segments[0]}/` });
+crumbs.push({ name: d.short, href: d.path });
+
+const schema: object[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      item: new URL(c.href, site.url).href,
+    })),
+  },
+];
+if (d.faqs.length) {
+  schema.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: d.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  });
+}
+---
+
+<BaseLayout title={d.metaTitle} description={d.metaDescription} schema={schema}>
+  <section class="page-hero">
+    <img src={`/images/${d.image}.jpg`} alt="" />
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            {crumbs.map((c, i) => (
+              <li>{i < crumbs.length - 1 ? <a href={c.href}>{c.name}</a> : <span aria-current="page">{c.name}</span>}</li>
+            ))}
+          </ol>
+        </nav>
+        <p class="eyebrow">{d.eyebrow}</p>
+        <h1>{d.title}</h1>
+        <p class="lede" set:html={d.lede} />
+        <div class="btn-row">
+          <a class="btn" href={site.phoneHref}>Call {site.phone}</a>
+          <a class="btn-outline" href="/contact/">Check your insurance</a>
+        </div>
+      </div>
+      <aside class="glance" aria-label="At a glance">
+        <h2>At a glance</h2>
+        <dl>
+          <div><dt>Levels of care</dt><dd>Medical detox and residential treatment</dd></div>
+          <div><dt>Setting</dt><dd>{site.beds}-bed inpatient facility</dd></div>
+          <div><dt>Who we treat</dt><dd>Adults with substance use and co-occurring mental health conditions</dd></div>
+          <div><dt>Location</dt><dd>{site.address.city}, {site.address.state}</dd></div>
+        </dl>
+        <a class="btn" href={site.phoneHref}>Talk with admissions</a>
+      </aside>
+    </div>
+    <TornEdge position="bottom" />
+  </section>
+
+  <div class="container page-body">
+    <aside class="page-sidebar">
+      <p class="reviewer">Clinically reviewed by [Clinician name, credentials]<br />Last reviewed [Month DD, YYYY]</p>
+      {toc.length > 2 && (
+        <nav class="toc" aria-label="On this page">
+          <p class="toc-title">On this page</p>
+          <ul>
+            {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+          </ul>
+        </nav>
+      )}
+      <div class="sidebar-cta">
+        <p class="title">Questions about treatment?</p>
+        <p class="sub">Talk with admissions. It’s free and confidential.</p>
+        <a class="btn-light" href={site.phoneHref}>{site.phone}</a>
+      </div>
+    </aside>
+    <article class="prose">
+      <figure class="hero-figure">
+        <img src={`/images/${d.image}.jpg`} alt={imageAlt[d.image] ?? ''} loading="lazy" />
+      </figure>
+      <Content />
+    </article>
+  </div>
+</BaseLayout>

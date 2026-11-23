@@ -1,12 +1,12 @@
-# Blue Ridge Behavioral Health
+# Bays Mountain Recovery
 
-Website for Blue Ridge Behavioral Health, a 25-bed inpatient detox and residential substance use treatment center in Kingsport, TN.
+Website for Bays Mountain Recovery, a 25-bed medical detox and residential addiction treatment center in Kingsport, TN.
 
-- **Domain:** blueridgebhtn.com
+- **Domain:** baysmountainrecovery.com
 - **Address:** 2000 Greenway Street, Kingsport, TN 37660
-- **Phone:** 865-272-4000
-- **Status:** Pre-launch ("Coming in 2027")
+- **Phone:** (423) 214-1113
 - **Stack:** Astro (static) on Cloudflare Workers, same setup as the GBAC clean-code build
+- **Status:** Staging. Every page is `noindex` and `robots.txt` blocks crawlers while `site.staging` is `true` in `src/data/site.ts`.
 
 ## Get started
 
@@ -18,45 +18,50 @@ npm run preview   # build, then serve with Wrangler (Workers runtime)
 npm run deploy    # build and deploy to Cloudflare Workers
 ```
 
-## Project structure
+## How content works
 
-```
-src/
-  data/site.ts            Business info (NAP) and navigation — edit here first
-  styles/global.css       Design tokens (brand colors, type, spacing)
-  layouts/BaseLayout.astro  <head>, SEO meta, canonical, LocalBusiness schema
-  components/             Header, Footer, PageStub
-  pages/                  One file per URL
-public/
-  images/                 Logo and site imagery
-  robots.txt
-wrangler.jsonc            Cloudflare Workers config
-```
+Page copy comes from the content docs in Google Drive (one doc per URL). Each doc becomes a markdown file in `src/content/pages/`, named after its URL (`/detox/alcohol/` → `detox--alcohol.md`). The frontmatter holds:
+
+| Field | From the doc |
+| --- | --- |
+| `path` | URL |
+| `metaTitle` | Meta Title |
+| `metaDescription` | Meta Description |
+| `title` | H1 |
+| `lede` | First paragraph under the H1 (shown in the hero) |
+| `faqs` | The FAQ section (also output as FAQPage schema) |
+
+The interior template (`src/pages/[...slug].astro`) builds the breadcrumb, the "On this page" jumplinks from the H2s, and the FAQ accordion. The homepage (`src/pages/index.astro`) and contact page (`src/pages/contact.astro`) are hand-built from their docs.
 
 ## Pages
 
-| URL | Status |
+| URL | Source doc |
 | --- | --- |
-| `/` | Splash page (live pre-launch) |
-| `/about` | Stub |
-| `/treatment` | Stub |
-| `/treatment/detox` | Stub |
-| `/treatment/residential` | Stub |
-| `/what-we-treat` | Stub |
-| `/insurance` | Stub |
-| `/contact` | Stub |
+| `/` | Homepage |
+| `/about/` | About |
+| `/about/our-team/` | Our Team |
+| `/about/facility/` | Facility |
+| `/contact/` | Contact |
+| `/detox/` | Detox |
+| `/detox/alcohol/` | Alcohol Detox |
+| `/detox/opioids/` | Opioid Detox |
+| `/detox/benzodiazepine/` | Benzodiazepine Detox |
+| `/detox/meth/` | Meth Detox |
+| `/residential-treatment/` | Residential Treatment |
+| `/addiction/` | Addiction |
+| `/addiction/alcohol/` | Alcohol Addiction |
+| `/addiction/opioids/` | Opioid Addiction |
+| `/addiction/heroin/` | Heroin Addiction |
+| `/addiction/meth/` | Meth Addiction |
+| `/therapies/` | Therapies |
 
-Stub pages are `noindex` and left out of the sitemap until launch.
+## Before launch
 
-**Not in the launch build:** Admissions, Areas We Serve, and Resources pillars. These roll out with the SEO campaign after launch.
-
-## Launch checklist
-
-- [ ] Align page slugs with the approved sitemap
-- [ ] Add the stacked mountain-arch logo to `public/images/` and the header
-- [ ] Replace placeholder colors and fonts in `global.css`
-- [ ] Replace the splash page with the full homepage (GBAC layout)
-- [ ] Write page content; remove `noindex` from finished pages
-- [ ] Remove the pre-launch sitemap filter in `astro.config.mjs`
-- [ ] Connect forms to CTM (FormReactor)
+- [ ] Connect the contact form to the CTM FormReactor (no tracking pixels on the form)
+- [ ] Add staff names, credentials, bios, and headshots to `/about/our-team/`
+- [ ] Fill in the "Clinically reviewed by" line on interior pages
+- [ ] Replace the Kingsport photos with full-resolution originals and facility photos
+- [ ] Add the Privacy Policy and Terms and Conditions pages linked in the footer
+- [ ] Add social links to the footer
+- [ ] Set `site.staging` to `false` in `src/data/site.ts`
 - [ ] Add the custom domain in `wrangler.jsonc`

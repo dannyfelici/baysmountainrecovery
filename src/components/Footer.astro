@@ -1,33 +1,57 @@
 ---
-import { site, nav } from '../data/site';
+import { site, footerLinks } from '../data/site';
+import TornEdge from './TornEdge.astro';
+
+interface Props {
+  ctaTitle?: string;
+  ctaText?: string;
+}
+const {
+  ctaTitle = 'Ready to Talk? We’re Here.',
+  ctaText = 'Whether you are looking for help for yourself or someone you love, reaching out can be the first step toward a healthier future. Ask about medical detox, residential care, and how treatment at Bays Mountain Recovery may fit your needs.',
+} = Astro.props;
 const year = new Date().getFullYear();
 ---
 
+<section class="cta-band">
+  <TornEdge position="top" />
+  <div class="container">
+    <h2>{ctaTitle}</h2>
+    <p>{ctaText}</p>
+    <div class="btn-row">
+      <a class="btn-light" href={site.phoneHref}>Call {site.phone}</a>
+      <a class="btn-outline" href="/contact/">Contact Us Online</a>
+    </div>
+  </div>
+</section>
 <footer class="site-footer">
   <div class="container footer-inner">
-    <div>
-      <p class="footer-name">{site.name}</p>
+    <div class="footer-brand">
+      <img src="/images/bays-mountain-recovery-horizontal-reversed.svg" alt={site.name} width="300" height="64" loading="lazy" />
+      <p>{site.tagline}</p>
       <address>
         {site.address.street}<br />
         {site.address.city}, {site.address.state} {site.address.zip}<br />
         <a href={site.phoneHref}>{site.phone}</a>
       </address>
     </div>
-    <ul class="footer-nav">
-      {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+    <nav aria-label="Quick links">
+      <p class="footer-title">Quick Links</p>
+      <ul class="footer-links">
+        {footerLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="footer-crisis">
+      <p class="footer-title">In a crisis?</p>
+      <p>Call or text <strong>988</strong>, the Suicide &amp; Crisis Lifeline. In an emergency, call 911.</p>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <p>&copy; {year} {site.name}. All rights reserved.</p>
+    <ul>
+      <li><a href="/privacy-policy/">Privacy Policy</a></li>
+      <li><a href="/terms-and-conditions/">Terms and Conditions</a></li>
+      <li><a href="/sitemap-index.xml">Sitemap</a></li>
     </ul>
   </div>
-  <div class="container legal">
-    <p>&copy; {year} {site.name}. All rights reserved.</p>
-  </div>
 </footer>
-
-<style>
-  .site-footer { background: var(--color-primary-dark); color: #fff; padding-block: 3rem 1.5rem; margin-top: var(--space-section); }
-  .site-footer a { color: #fff; }
-  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
-  .footer-name { font-family: var(--font-heading); font-size: 1.25rem; margin: 0 0 0.5rem; }
-  address { font-style: normal; }
-  .footer-nav { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
-  .legal { margin-top: 2rem; font-size: 0.875rem; opacity: 0.8; }
-</style>
