@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TornEdge from '../components/TornEdge.astro';
+import { site, sectionLabels } from '../data/site';
+
+const pages = await getCollection('pages');
+const order = ['about', 'detox', 'residential-treatment', 'addiction', 'therapies'];
+
+// Group pages by section; the section's own page leads the group.
+const groups = order.map((key) => {
+  const inSection = pages.filter((p) => p.data.path.split('/').filter(Boolean)[0] === key);
+  const parent = inSection.find((p) => p.data.path === `/${key}/`);
+  const children = inSection
+    .filter((p) => p !== parent)
+    .sort((a, b) => a.data.short.localeCompare(b.data.short));
+  return { key, label: sectionLabels[key], parent, children };
+});
+// Sections with child pages get their own card; single pages go in "Main pages".
+const sections = groups.filter((g) => g.children.length > 0);
+const mainPages = [
+  { name: 'Home', href: '/' },
+  ...groups.filter((g) => g.children.length === 0 && g.parent).map((g) => ({ name: g.label, href: g.parent!.data.path })),
+  { name: 'Contact', href: '/contact/' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Sitemap', item: `${site.url}/sitemap/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Sitemap | Bays Mountain Recovery"
+  description="Find every page on the Bays Mountain Recovery website, including medical detox, residential treatment, addiction treatment, and therapy in Kingsport, TN."
+  schema={schema}
+>
+  <section class="page-hero">
+    <img src="/images/bays-mountain-skyline.jpg" alt="" />
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol><li><a href="/">Home</a></li><li><span aria-current="page">Sitemap</span></li></ol>
+        </nav>
+        <p class="eyebrow">Sitemap</p>
+        <h1>Sitemap</h1>
+        <p class="lede">Every page on our site, grouped by topic.</p>
+      </div>
+    </div>
+    <TornEdge position="bottom" />
+  </section>
+
+  <section class="container section--tight" style="padding-bottom: var(--section)">
+    <div class="sitemap-grid">
+      <div class="sitemap-group">
+        <h2>Main pages</h2>
+        <ul>
+          {mainPages.map((m) => <li><a href={m.href}>{m.name}</a></li>)}
+        </ul>
+      </div>
+      {sections.map((g) => (
+        <div class="sitemap-group">
+          <h2>{g.parent ? <a href={g.parent.data.path}>{g.label}</a> : g.label}</h2>
+          <ul>
+            {g.children.map((c) => <li><a href={c.data.path}>{c.data.short}</a></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
