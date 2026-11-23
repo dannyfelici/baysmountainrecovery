@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
 import TornEdge from '../components/TornEdge.astro';
 import { site, payers, mapEmbed } from '../data/site';
 
@@ -52,11 +51,9 @@ const features = [
   title="Drug & Alcohol Rehab | Kingsport, TN | Bays Mountain Recovery"
   description="Explore drug and alcohol rehab in Kingsport, TN. Bays Mountain Recovery offers medical detox and residential treatment for adults with addiction."
   schema={schema}
-  headerOverHero
 >
   <section class="home-hero">
     <img src="/images/bays-mountain-skyline.jpg" alt="Bays Mountain rising above Kingsport, Tennessee" fetchpriority="high" />
-    <Header solid={false} />
     <div class="container home-hero-copy">
       <p class="eyebrow">Medical Detox &amp; Residential Treatment · Kingsport, TN</p>
       <h1>Drug and Alcohol Rehab in Kingsport, TN</h1>

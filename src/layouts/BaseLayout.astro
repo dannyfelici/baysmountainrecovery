@@ -8,12 +8,11 @@ interface Props {
   title: string;
   description: string;
   schema?: object[];
-  headerOverHero?: boolean;
   ctaTitle?: string;
   ctaText?: string;
 }
 
-const { title, description, schema = [], headerOverHero = false, ctaTitle, ctaText } = Astro.props;
+const { title, description, schema = [], ctaTitle, ctaText } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 
 const business = {
@@ -60,7 +59,7 @@ const business = {
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     {site.staging && <div class="staging-bar">Staging site · not yet public</div>}
-    {!headerOverHero && <Header />}
+    <Header />
     <main id="main">
       <slot />
     </main>

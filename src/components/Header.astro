@@ -1,14 +1,12 @@
 ---
 import { site, nav } from '../data/site';
 
-interface Props { solid?: boolean }
-const { solid = true } = Astro.props;
 const current = Astro.url.pathname;
 const isCurrent = (href: string) => current === href || (href !== '/' && current.startsWith(href));
 const caret = '<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 L5 6.5 L8 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>';
 ---
 
-<header class:list={['site-header', { 'site-header--solid': solid }]}>
+<header class="site-header">
   <div class="container header-inner">
     <a href="/" class="logo" aria-label={`${site.name} home`}>
       <img src="/images/bays-mountain-recovery-horizontal.svg" alt={site.name} width="260" height="56" />
