@@ -58,7 +58,7 @@ The interior template (`src/pages/[...slug].astro`) builds the breadcrumb, the "
 ## Before launch
 
 - [x] Contact form is the CTM FormReactor "Contact Form" (set routing in CTM)
-- [ ] Add the CTM tracking script (account embed code) to BaseLayout for number swap and source attribution
+- [x] CTM tracking script and GA4 load through Google Tag Manager (GTM-W4TTKVHJ)
 - [ ] Add staff names, credentials, bios, and headshots to `/about/our-team/`
 - [ ] Fill in the "Clinically reviewed by" line on interior pages
 - [ ] Replace the Kingsport photos with full-resolution originals and facility photos
