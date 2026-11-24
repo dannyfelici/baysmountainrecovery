@@ -22,6 +22,7 @@ const mainPages = [
   { name: 'Home', href: '/' },
   ...groups.filter((g) => g.children.length === 0 && g.parent).map((g) => ({ name: g.label, href: g.parent!.data.path })),
   { name: 'Contact', href: '/contact/' },
+  { name: 'Insurance Verification', href: '/insurance-verification/' },
 ];
 
 const schema = [

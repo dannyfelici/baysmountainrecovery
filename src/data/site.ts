@@ -53,7 +53,11 @@ export const nav: NavItem[] = [
     ],
   },
   { label: 'Therapies', href: '/therapies/' },
-  { label: 'Contact', href: '/contact/' },
+  {
+    label: 'Contact',
+    href: '/contact/',
+    children: [{ label: 'Insurance Verification', href: '/insurance-verification/' }],
+  },
 ];
 
 export const footerLinks = [
@@ -62,6 +66,7 @@ export const footerLinks = [
   { label: 'Residential Treatment', href: '/residential-treatment/' },
   { label: 'Addiction Treatment', href: '/addiction/' },
   { label: 'Therapies', href: '/therapies/' },
+  { label: 'Insurance Verification', href: '/insurance-verification/' },
   { label: 'Contact', href: '/contact/' },
 ];
 

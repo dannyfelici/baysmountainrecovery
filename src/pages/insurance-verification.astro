@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TornEdge from '../components/TornEdge.astro';
+import { site, payers } from '../data/site';
+
+const faqs = [
+  {
+    q: 'Does it cost anything to verify my insurance?',
+    a: 'No. Checking your benefits is free, and asking about coverage does not commit you to treatment.',
+  },
+  {
+    q: 'How long does insurance verification take?',
+    a: 'Our admissions team reviews your benefits as soon as they can and follows up by phone. If you need to talk sooner, call us directly.',
+  },
+  {
+    q: 'What if my insurance plan is not listed?',
+    a: 'Send the form anyway or call us. We work with many major insurance providers, and our team can check whether your specific plan covers medical detox or residential treatment.',
+  },
+  {
+    q: 'What if my insurance does not cover treatment?',
+    a: 'Our admissions team can explain what your plan covers, what out-of-pocket costs may look like, and other options for getting care.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Contact', item: `${site.url}/contact/` },
+      { '@type': 'ListItem', position: 3, name: 'Insurance Verification', item: `${site.url}/insurance-verification/` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<BaseLayout
+  title="Verify Your Insurance for Rehab | Bays Mountain Recovery"
+  description="Check your insurance coverage for medical detox and residential addiction treatment at Bays Mountain Recovery in Kingsport, TN. Free and confidential."
+  schema={schema}
+>
+  <section class="page-hero">
+    <img src="/images/fall-lake-bridge.jpg" alt="" />
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><span aria-current="page">Insurance Verification</span></li>
+          </ol>
+        </nav>
+        <p class="eyebrow">Insurance Verification</p>
+        <h1>Verify Your Insurance for Addiction Treatment</h1>
+        <p class="lede">Questions about insurance shouldn't keep you from getting help. Share your insurance information, and our admissions team will check your benefits for medical detox and residential treatment in Kingsport, TN, then call you to explain your coverage and next steps.</p>
+        <p>Prefer to talk now? Call <a href={site.phoneHref}>{site.phone}</a>.</p>
+      </div>
+    </div>
+    <TornEdge position="bottom" />
+  </section>
+
+  <section class="container section--tight">
+    <div class="contact-grid">
+      <!-- TODO: replace with the CTM "Insurance Verification" FormReactor embed. -->
+      <div class="contact-form ctm-form" id="verify-form">
+        <div class="placeholder">The insurance verification form will appear here.</div>
+      </div>
+      <aside class="contact-aside">
+        <div class="card">
+          <h3>What you'll need</h3>
+          <ul class="checklist-plain">
+            <li>Your insurance card (front and back)</li>
+            <li>The member ID and group number</li>
+            <li>The policyholder's name and date of birth</li>
+            <li>The name and date of birth of the person seeking treatment, if different</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Rather talk to someone?</h3>
+          <p>Our admissions team can verify your insurance over the phone.</p>
+          <a class="btn" href={site.phoneHref}>Call {site.phone}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="container section--tight">
+    <h2 class="center" style="text-align: center">How Insurance Verification Works</h2>
+    <ol class="steps">
+      <li><span class="num">1</span><h3>Share your information</h3><p>Fill out the form or call us with your insurance details.</p></li>
+      <li><span class="num">2</span><h3>We check your benefits</h3><p>Our admissions team contacts your insurance provider to review coverage for detox and residential care.</p></li>
+      <li><span class="num">3</span><h3>We call you back</h3><p>We explain what your plan covers and any possible out-of-pocket costs.</p></li>
+      <li><span class="num">4</span><h3>Plan your admission</h3><p>If you're ready, we help you plan the next steps toward treatment.</p></li>
+    </ol>
+  </section>
+
+  <section class="container section--tight">
+    <div class="panel">
+      <div>
+        <h2 style="font-size: clamp(1.6rem, 2.6vw, 2rem)">Insurance Plans We Work With</h2>
+        <p>We work with many major insurance providers, including Blue Cross Blue Shield, Aetna, Cigna, UnitedHealthcare, and Humana. Coverage for medically necessary addiction treatment depends on your plan, benefits, and clinical needs.</p>
+        <p style="margin: 0">Don't see your provider? <a href={site.phoneHref}>Call us</a> to check your plan.</p>
+      </div>
+      <div class="payers">
+        {payers.map((p) => (
+          <div><img src={p.logo} alt={p.name} style={`height: ${p.h}px`} loading="lazy" /></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container section--tight" style="max-width: 58rem; padding-bottom: var(--section)">
+    <h2 style="text-align: center">Insurance Verification FAQs</h2>
+    {faqs.map((f) => (
+      <details class="faq">
+        <summary>{f.q}</summary>
+        <div class="faq-a"><p>{f.a}</p></div>
+      </details>
+    ))}
+  </section>
+</BaseLayout>
