@@ -38,25 +38,16 @@ const schema = [
 
   <section class="container section--tight" style="padding-bottom: var(--section)">
     <div class="contact-grid">
-      <!-- TODO: connect to the CTM FormReactor before launch. Keep the form free of tracking pixels (HIPAA). -->
-      <form class="contact-form" method="post" action="#" data-ctm-form="contact">
-        <h2 style="font-size: 1.5rem; margin: 0">Send us a message</h2>
-        <label>Full name<input type="text" name="name" autocomplete="name" required /></label>
-        <div class="row">
-          <label>Phone<input type="tel" name="phone" autocomplete="tel" required /></label>
-          <label>Email<input type="email" name="email" autocomplete="email" /></label>
-        </div>
-        <label>Who is treatment for?
-          <select name="for_whom">
-            <option>Myself</option>
-            <option>A loved one</option>
-            <option>A client or patient</option>
-          </select>
-        </label>
-        <label>How can we help?<textarea name="message"></textarea></label>
-        <p class="fine">Please don't include detailed medical information. Our admissions team will follow up by phone.</p>
-        <button class="btn" type="submit">Send message</button>
-      </form>
+      <!-- CTM FormReactor "Contact Form" (Bays Mountain Recovery account). Edit fields, copy, and styles in CTM. -->
+      <div class="contact-form ctm-form">
+        <iframe
+          class="ctm-call-widget"
+          title="Contact form"
+          src="https://614631.tctm.co/form/FRT472ABB2C5B9B141A393FC9F62723CECA7C50404FF38CEF5FCB0E997FC5FFE642.html"
+          style="width:100%;height:640px;border:none"
+        ></iframe>
+        <script is:inline defer async src="https://614631.tctm.co/formreactor.js"></script>
+      </div>
       <aside class="contact-aside">
         <div class="card">
           <h3>Call admissions</h3>
