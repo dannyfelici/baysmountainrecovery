@@ -16,6 +16,8 @@ export const site = {
   // While true, every page is noindex and robots.txt blocks crawling.
   // Set to false at launch.
   staging: true,
+  // Google Tag Manager container
+  gtmId: 'GTM-W4TTKVHJ',
 };
 
 export type NavItem = { label: string; href: string; children?: { label: string; href: string }[] };
