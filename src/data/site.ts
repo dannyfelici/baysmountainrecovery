@@ -94,8 +94,18 @@ export const mapEmbed =
   'https://www.google.com/maps?q=2000+Greenway+Street,+Kingsport,+TN+37660&output=embed';
 
 export const imageAlt: Record<string, string> = {
-  'bays-mountain-skyline': 'Bays Mountain rising above Kingsport, Tennessee',
-  'kingsport-sunset-aerial': 'Downtown Kingsport at sunset with Bays Mountain in the distance',
-  'kingsport-downtown': 'Tree-lined street in downtown Kingsport, Tennessee',
-  'fall-lake-bridge': 'Fall color around a lake near Kingsport, Tennessee',
+  'reservoir-reflection': 'The reservoir at Bays Mountain Park reflecting the autumn tree line',
+  'reservoir-calm': 'Still water and forested ridges at Bays Mountain Park in Kingsport, Tennessee',
+  'reservoir-shoreline': 'Grassy shoreline of the reservoir at Bays Mountain Park',
+  'reservoir-leaning-pine': 'A leaning pine over the reservoir at Bays Mountain Park',
+  'boardwalk-gazebo': 'Wooden boardwalk and gazebo along the water at Bays Mountain Park',
+  'gazebo-wide': 'Timber-frame gazebo beside the reservoir at Bays Mountain Park',
+  'gazebo-lakeside': 'Lakeside gazebo at Bays Mountain Park in Kingsport, Tennessee',
+  'sun-through-trees': 'Sunlight through bare hardwoods in the East Tennessee woods',
+  'autumn-treetops': 'Autumn treetops under a blue sky near Kingsport, Tennessee',
+  'forest-canopy': 'Tall hardwoods and evergreens in the forest at Bays Mountain',
+  'tall-hardwoods': 'Looking up at tall hardwood trees in late autumn',
+  'forest-hillside': 'A wooded hillside above the water at Bays Mountain Park',
+  'lily-pads': 'Lily pads on dark, still water at Bays Mountain Park',
+  'stone-steps': 'Stone steps and a small cascade at the Bays Mountain dam',
 };

@@ -5,7 +5,7 @@ eyebrow: "About Us"
 path: "/about/facility/"
 metaTitle: "Our Addiction Treatment Facility in Kingsport, TN"
 metaDescription: "Explore our 25-bed addiction treatment facility in Kingsport, TN, offering medical detox and residential care in the foothills of the Appalachians."
-image: "bays-mountain-skyline"
+image: "gazebo-wide"
 lede: "The environment where you begin recovery can make an important difference in how you feel about seeking help. When you're stepping away from familiar routines and facing the challenges of addiction, you deserve a place where you can feel welcomed, respected, and supported."
 faqs: []
 ---

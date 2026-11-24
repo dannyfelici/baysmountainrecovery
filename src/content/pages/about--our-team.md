@@ -5,7 +5,7 @@ eyebrow: "About Us"
 path: "/about/our-team/"
 metaTitle: "Our Clinical Team | Bays Mountain Recovery"
 metaDescription: "Learn about the compassionate approach of our addiction treatment team in Kingsport, TN, supporting medical detox and residential recovery."
-image: "kingsport-downtown"
+image: "boardwalk-gazebo"
 lede: "When you're entering addiction treatment, the people who care for you can make an unfamiliar experience feel more welcoming. You're trusting others with your health, sharing deeply personal experiences, and beginning a journey that may feel overwhelming. You deserve to be met with compassion, understanding, and respect."
 faqs: []
 ---

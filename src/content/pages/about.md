@@ -5,7 +5,7 @@ eyebrow: "About Us"
 path: "/about/"
 metaTitle: "About Bays Mountain Recovery | Kingsport, TN"
 metaDescription: "Learn about our compassionate approach to addiction treatment, connected medical detox and residential care, and commitment to East Tennessee."
-image: "kingsport-sunset-aerial"
+image: "reservoir-calm"
 lede: "Recovery is about more than overcoming addiction. It's about rebuilding your health, restoring relationships, finding hope, and creating a better future for yourself and the people you care about. At Bays Mountain Recovery, we believe everyone deserves the opportunity to make those changes in an environment built on compassion, dignity, and respect."
 faqs: []
 ---

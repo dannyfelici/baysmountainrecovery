@@ -49,7 +49,7 @@ if (d.faqs.length) {
 
 <BaseLayout title={d.metaTitle} description={d.metaDescription} schema={schema}>
   <section class="page-hero">
-    <img src={`/images/${d.image}.jpg`} alt="" />
+    <img src={`/images/${d.image}-800.webp`} alt="" />
     <div class="container page-hero-inner">
       <div class="page-hero-copy">
         <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -100,7 +100,14 @@ if (d.faqs.length) {
     </aside>
     <article class="prose">
       <figure class="hero-figure">
-        <img src={`/images/${d.image}.jpg`} alt={imageAlt[d.image] ?? ''} loading="lazy" />
+        <img
+          src={`/images/${d.image}-800.webp`}
+          srcset={`/images/${d.image}-800.webp 800w, /images/${d.image}.webp 1440w`}
+          sizes="(min-width: 1100px) 860px, 100vw"
+          alt={imageAlt[d.image] ?? ''}
+          width="1440" height="1080"
+          loading="lazy"
+        />
       </figure>
       <Content />
     </article>
